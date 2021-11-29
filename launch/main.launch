@@ -1,5 +1,4 @@
 <launch>
-    <arg name="do_teleop" default="0" />
     <arg name="record" default="0" />
     <arg name="do_rqt_console" default="0" />
     <arg name="screen_output" default="1" />
@@ -11,9 +10,6 @@
 
     <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch" />
     <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_gazebo_rviz.launch" />
-    <include file="$(find turtlebot3_teleop)/launch/turtlebot3_teleop_key.launch"
-             if="$(arg do_teleop)"
-    />
 
     <node name="turtlebot3_walker"
           pkg="turtlebot3_walker"

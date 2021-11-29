@@ -59,12 +59,48 @@ int main(int argc, char** argv) {
     ros::init(argc, argv, "turtlebot3_walker");
     ros::NodeHandle nh;
 
+    double ws;
+    if (nh.getParam("initial_walking_speed", ws) && (0 < ws)) {
+        ROS_DEBUG_STREAM("Received initial walking speed: " << ws);
+    } else {
+        ROS_FATAL_STREAM("ROS parameter 'initial_walking_speed' either unset"
+                         " or has an improper value, must be a nonzero,"
+                         " positive double.");
+        return -1;
+    }
+
+    double es;
+    if (nh.getParam("initial_evaluation_speed", es) && (0 < es)) {
+        ROS_DEBUG_STREAM("Received initial evaluation speed: " << es);
+    } else {
+        ROS_FATAL_STREAM("ROS parameter 'initial_evaluation_speed' either"
+                         " unset or has an improper value, must be a nonzero,"
+                         " positive double.");
+        return -1;
+    }
+
+    double sar;
+    if (nh.getParam("initial_stop_angle_range", sar) && (0 < sar)) {
+        ROS_DEBUG_STREAM("Received initial stop angle range: " << sar);
+    } else {
+        ROS_FATAL_STREAM("ROS parameter 'initial_stop_angle_range' either"
+                         " unset or has an improper value, must be a nonzero,"
+                         " positive double.");
+        return -1;
+    }
+
+    double st;
+    if (nh.getParam("initial_stop_threshold", st) && (0 < st)) {
+        ROS_DEBUG_STREAM("Received initial stop threshold: " << st);
+    } else {
+        ROS_FATAL_STREAM("ROS parameter 'initial_stop_threshold' either"
+                         " unset or has an improper value, must be a nonzero,"
+                         " positive double.");
+        return -1;
+    }
+
     // Create our controller given configuration parameters on the param server
-    // TODO: create with params
-    WalkerController controller(0.0,
-                                0.0,
-                                0.0,
-                                0.0);
+    WalkerController controller(ws, es, sar, st);
 
     // Publish the command velocity topic for the turtlebot
     ros::Publisher cmd_vel_pub = nh.advertise<geometry_msgs::Twist>(

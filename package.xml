@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>turtlebot3_walker</name>
+    <version>0.0.0</version>
+    <description>This package is a simple walker implementation for a turtlebot3 burger.</description>
+    <maintainer email="rnvandemark@gmail.com">R. Nick Vandemark</maintainer>
+    <license>BSD</license>
+    <author>R. Nick Vandemark</author>
+
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <depend>roscpp</depend>
+
+    <doc_depend>doxygen</doc_depend>
+</package>

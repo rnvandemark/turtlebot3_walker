@@ -1,0 +1,49 @@
+<launch>
+    <arg name="record" default="0" />
+    <arg name="do_rqt_console" default="0" />
+    <arg name="screen_output" default="1" />
+
+    <arg name="initial_walking_speed" default="0.3" />
+    <arg name="initial_evaluation_speed" default="0.5" />
+    <arg name="initial_stop_angle_range" default="1.04719755" />
+    <arg name="initial_stop_threshold" default="0.3" />
+
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch" />
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_gazebo_rviz.launch" />
+
+    <node name="turtlebot3_walker"
+          pkg="turtlebot3_walker"
+          type="turtlebot3_walker"
+          output="$(eval 'screen' if screen_output else 'log')"
+    />
+
+    <node name="recorder"
+          pkg="rosbag"
+          type="record"
+          output="log"
+          args="-a"
+          if="$(arg record)"
+    />
+
+    <node name="my_rqt_console"
+          pkg="rqt_console"
+          type="rqt_console"
+          required="false"
+          output="screen"
+          if="$(arg do_rqt_console)"
+    />
+    <node name="my_rqt_logger_level"
+          pkg="rqt_logger_level"
+          type="rqt_logger_level"
+          required="false"
+          output="screen"
+          if="$(arg do_rqt_console)"
+    />
+
+    <rosparam subst_value="True">
+        /initial_walking_speed: $(arg initial_walking_speed)
+        /initial_evaluation_speed: $(arg initial_evaluation_speed)
+        /initial_stop_angle_range: $(arg initial_stop_angle_range)
+        /initial_stop_threshold: $(arg initial_stop_threshold)
+    </rosparam>
+</launch>

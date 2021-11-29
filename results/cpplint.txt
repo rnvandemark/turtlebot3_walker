@@ -1,0 +1,9 @@
+Ran the following command in the package's root directory:
+
+cpplint src/* include/turtlebot3_walker/*
+
+With the resulting output:
+
+Done processing include/turtlebot3_walker/WalkerController.hpp
+Done processing src/WalkerController.cpp
+Done processing src/WalkerNode.cpp

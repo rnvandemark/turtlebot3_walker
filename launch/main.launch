@@ -1,0 +1,38 @@
+<launch>
+    <arg name="do_teleop" default="0" />
+    <arg name="record" default="0" />
+    <arg name="do_rqt_console" default="0" />
+    <arg name="screen_output" default="1" />
+
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch" />
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_gazebo_rviz.launch" />
+    <include file="$(find turtlebot3_teleop)/launch/turtlebot3_teleop_key.launch"
+             if="$(arg do_teleop)"
+    />
+
+    <node name="recorder"
+          pkg="rosbag"
+          type="record"
+          output="log"
+          args="-a"
+          if="$(arg record)"
+    />
+
+    <node name="my_rqt_console"
+          pkg="rqt_console"
+          type="rqt_console"
+          required="false"
+          output="screen"
+          if="$(arg do_rqt_console)"
+    />
+    <node name="my_rqt_logger_level"
+          pkg="rqt_logger_level"
+          type="rqt_logger_level"
+          required="false"
+          output="screen"
+          if="$(arg do_rqt_console)"
+    />
+
+    <rosparam subst_value="True">
+    </rosparam>
+</launch>

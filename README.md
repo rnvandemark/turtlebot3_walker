@@ -56,3 +56,24 @@ roslaunch turtlebot3_walker main.launch
     node/windows will be started as well
   - screen_output (value of either 0 or 1, 1 by default): If set to 1, the
     walker node will log to the screen, otherwise will log to a log file
+
+### Using ROS Bags
+
+Run the simulation and record a ROS bag of your own with the following command:
+```
+roslaunch turtlebot3_walker main.launch record:=1
+```
+
+The bag file should be created in the ROS environment root folder. A sample bag
+file can also be seen in the results directory of this package.
+
+To dump information on a desired bag file, run the following command:
+```
+rosbag info /path/to/file.bag
+```
+
+And to play back the recorded sequence of events, run the following command:
+```
+# WARNING: no Gazebo simulator should be running when entering this command!
+rosbag play /path/to/file.bag
+```

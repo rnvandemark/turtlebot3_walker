@@ -18,6 +18,13 @@ sudo apt-get install ros-melodic-turtlebot3* ros-melodic-gazebo*
 
 ## How to
 
+### Sourcing Your Environment
+
+```
+# It's recommended you do this with every shell opened
+source /opt/ros/melodic/setup.bash
+```
+
 ### Building the Program
 
 ```
@@ -30,4 +37,22 @@ catkin_make install
 
 ### Running a Sample of the Program
 
-TODO
+- Set the following environment variable as such:
+```
+export TURTLEBOT3_MODEL=burger
+```
+- Source the local workspace (as well as the ROS installation):
+```
+source /path/to/catkin_ws/install/setup.bash
+```
+- A launch file is available to run the walker algorithm with a visualization:
+```
+roslaunch turtlebot3_walker main.launch
+```
+- Launch file arguments:
+  - record (value of either 0 or 1, 0 by default): If set to 1, a rosbag will
+    be recorded
+  - do_rqt_console (value of either 0 or 1, 0 by default): If set to 1, a rqt
+    node/windows will be started as well
+  - screen_output (value of either 0 or 1, 1 by default): If set to 1, the
+    walker node will log to the screen, otherwise will log to a log file

@@ -1,0 +1,18 @@
+Ran the following command in the package's root directory:
+
+cppcheck --enable=all --std=c++11 --suppress=missingIncludeSystem src/* include/turtlebot3_walker/*
+
+With the resulting output:
+
+Checking include/turtlebot3_walker/WalkerController.hpp ...
+1/3 files checked 36% done
+Checking src/WalkerController.cpp ...
+2/3 files checked 64% done
+Checking src/WalkerNode.cpp ...
+3/3 files checked 100% done
+(information) Cppcheck cannot find all the include files (use --check-config for details)
+
+The output shows that there are warnings that the tool cannot find a
+header file, but its location follows a ROS/catkin package standard.
+Choosing to keep this as is (the package builds according to the
+instructions in the README).
